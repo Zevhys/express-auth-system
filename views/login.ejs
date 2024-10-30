@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+</head>
+
+<body>
+  <h3 align="center">Login Page</h3>
+
+  <div align="center">
+    <form action="/login" method="post">
+      <label for="username">Username</label>
+      <br>
+      <input type="text" id="username" name="username" placeholder="enter your username" required minlength="5"
+        maxlength="50" id="name" autocomplete="off" spellcheck="false" pattern=".*\S.*"
+        title="Please enter at least one non-space character">
+      <br>
+      <br>
+
+      <label for="password">Password</label>
+      <br>
+      <input type="password" id="password" name="password" placeholder="enter your password" required minlength="12"
+        maxlength="50" id="name" autocomplete="off" spellcheck="false" pattern=".*\S.*"
+        title="Please enter at least one non-space character">
+      <br>
+      <br>
+
+      <button type="submit">login</button>
+    </form>
+  </div>
+</body>
+
+</html>
