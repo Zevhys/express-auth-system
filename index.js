@@ -3,8 +3,6 @@ const app = express();
 const session = require("express-session");
 const mongoose = require("mongoose");
 
-// mongod --dbpath C:\data\db
-
 mongoose
   .connect("mongodb://127.0.0.1/authDB")
   .then((result) => {
