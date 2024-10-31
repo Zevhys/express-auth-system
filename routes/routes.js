@@ -3,6 +3,22 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
 
+const auth = (req, res, next) => {
+  if (!req.session.user_id) {
+    res.redirect("/signup");
+  }
+
+  next();
+};
+
+const authRedirect = (req, res, next) => {
+  if (!req.session.user_id) {
+    return next();
+  }
+
+  res.redirect("/dashboard");
+};
+
 router.get("/", (req, res) => {
   res.redirect("/home");
 });
@@ -11,36 +27,28 @@ router.get("/home", (req, res) => {
   res.render("home");
 });
 
-router.get("/signup", (req, res) => {
+router.get("/signup", authRedirect, (req, res) => {
   res.render("signup");
 });
 
 router.post("/signup", async (req, res) => {
   const { username, password } = req.body;
 
-  if (password.length < 12) {
-    return res.send("password harus minimal 8 karakter");
-  }
+  const hashedPassword = await bcrypt.hash(password, 12);
 
-  const passwordPattern =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-  if (!passwordPattern.test(password)) {
-    return res.send("password harus huruf besar, kecil, dan symbol");
-  }
+  const user = new User({
+    username,
+    password: hashedPassword,
+  });
 
-  const existingUser = await User.findOne({ username });
-  if (existingUser) {
-    return res.send("username telah dipakai, silahkan ganti");
-  }
+  await user.save();
 
-  const hashPassword = bcrypt.hashSync(password, 10);
-  const newUser = new User({ username, password: hashPassword });
-  await newUser.save();
+  req.session.user_id = user._id;
 
   res.redirect("/dashboard");
 });
 
-router.get("/login", (req, res) => {
+router.get("/login", authRedirect, (req, res) => {
   res.render("login");
 });
 
@@ -61,21 +69,13 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.post("/logout", (req, res) => {
-  if (!req.session.user_id) {
-    res.redirect("/signup");
-  }
-
+router.post("/logout", auth, (req, res) => {
   req.session.destroy(() => {
     res.redirect("/home");
   });
 });
 
-router.get("/dashboard", async (req, res) => {
-  if (!req.session.user_id) {
-    res.redirect("/signup");
-  }
-
+router.get("/dashboard", auth, async (req, res) => {
   try {
     const user = await User.findById(req.session.user_id);
 
