@@ -9,9 +9,14 @@
 
 <body>
   <h3 align="center">
-    welcome back
+    welcome back <%= user.username %>
   </h3>
 
+  <div align="center">
+    <form action="/logout" method="post">
+      <button type="submit">log out</button>
+    </form>
+  </div>
 </body>
 
 </html>
