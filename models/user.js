@@ -13,7 +13,6 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.statics.authenticateUser = async function (username, password) {
-  // Find the user by username
   const user = await this.findOne({ username });
   if (!user) {
     return { user: null, error: "User not found" };
