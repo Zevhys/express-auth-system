@@ -1,13 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const bcrypt = require("bcrypt");
 const User = require("../models/user");
 
 const auth = (req, res, next) => {
   if (!req.session.user_id) {
     return res.redirect("/signup");
   }
-
   next();
 };
 
@@ -15,7 +13,6 @@ const authRedirect = (req, res, next) => {
   if (req.session.user_id) {
     return res.redirect("/dashboard");
   }
-
   next();
 };
 
@@ -30,6 +27,12 @@ router.get("/signup", authRedirect, (req, res) => {
 router.post("/signup", async (req, res) => {
   const { username, password } = req.body;
   const user = new User({ username, password });
+  const existingUser = await User.findOne({ username });
+
+  if (existingUser) {
+    req.flash("messages", "username already exist, use another");
+    return res.redirect("/signup");
+  }
 
   await user.save();
   req.session.user_id = user._id;
@@ -47,7 +50,8 @@ router.post("/login", async (req, res) => {
   if (error === "User not found") {
     return res.redirect("/signup");
   } else if (error === "Incorrect password") {
-    return res.send("Incorrect password");
+    req.flash("messages", "incorrect password");
+    return res.redirect("login");
   }
 
   req.session.user_id = user._id;
