@@ -4,6 +4,7 @@ const session = require("express-session");
 const mongoose = require("mongoose");
 const favicon = require("serve-favicon");
 const path = require("path");
+const flash = require("connect-flash");
 
 mongoose
   .connect("mongodb://127.0.0.1/authDB")
@@ -13,9 +14,6 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
-
-app.set("view engine", "ejs");
-app.set("views", "views");
 
 app.use(
   express.urlencoded({
@@ -31,8 +29,16 @@ app.use(
   })
 );
 
-app.use("", require("./routes/routes"));
+app.use(flash());
 
+app.use((req, res, next) => {
+  res.locals.messages = req.flash("messages");
+  next();
+});
+
+app.set("view engine", "ejs");
+app.set("views", "views");
+app.use("", require("./routes/routes"));
 app.use(favicon(path.join(__dirname, "favicon.ico")));
 
 app.listen(8000, () => {
