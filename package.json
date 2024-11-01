@@ -13,6 +13,7 @@
     "ejs": "^3.1.10",
     "express": "^4.21.1",
     "express-session": "^1.18.1",
-    "mongoose": "^8.7.3"
+    "mongoose": "^8.7.3",
+    "serve-favicon": "^2.5.0"
   }
 }
