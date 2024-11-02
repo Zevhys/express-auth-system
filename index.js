@@ -41,6 +41,10 @@ app.set("views", "views");
 app.use("", require("./routes/routes"));
 app.use(favicon(path.join(__dirname, "favicon.ico")));
 
+app.use((req, res) => {
+  res.status(404).render("404", { title: "404" });
+});
+
 app.listen(8000, () => {
   console.log("Server running on local host port 8000");
 });
