@@ -4,6 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Zevhys">
+  <meta name="description" content="Form Signup Page">
+  <meta name="referrer" content="no-referrer">
+
   <title>Sign Up</title>
 </head>
 
@@ -11,7 +15,7 @@
   <h3 align="center">Sign Up Page</h3>
 
   <div align="center">
-    <form action="/signup" method="post">
+    <form action="/signup" method="post" autocomplete="off">
       <label for="username">Username</label>
       <br>
       <input type="text" id="username" name="username" placeholder="enter your username" required minlength="5"
@@ -26,17 +30,25 @@
         maxlength="50" autocomplete="off" spellcheck="false" pattern=".*\S.*"
         title="Please enter at least one non-space character">
       <br>
-      <br>
 
-      <p>
+      <p id="messages">
         <%= messages %>
       </p>
 
-      <button type="submit">create account</button>
+      <button type="submit">signup</button>
 
       <p>Already have an account? <a href="/login">login</a></p>
     </form>
   </div>
+
+  <script>
+    setTimeout(() => {
+      const messages = document.getElementById("messages")
+      if (messages) {
+        messages.textContent = ""
+      }
+    }, 3000);
+  </script>
 </body>
 
 </html>
