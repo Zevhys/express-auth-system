@@ -40,6 +40,7 @@ app.set("view engine", "ejs");
 app.set("views", "views");
 app.use("", require("./routes/routes"));
 app.use(favicon(path.join(__dirname, "favicon.ico")));
+app.use(express.static(path.join(__dirname, "assets")));
 
 app.use((req, res) => {
   res.status(404).render("404", { title: "404" });
