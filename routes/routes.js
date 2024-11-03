@@ -30,7 +30,7 @@ router.post("/signup", async (req, res) => {
   const existingUser = await User.findOne({ username });
 
   if (existingUser) {
-    req.flash("messages", "username already exist, use another");
+    req.flash("messages", "Username Already Exist, Use Another");
     return res.redirect("/signup");
   }
 
@@ -50,7 +50,7 @@ router.post("/login", async (req, res) => {
   if (error === "User not found") {
     return res.redirect("/signup");
   } else if (error === "Incorrect password") {
-    req.flash("messages", "incorrect password");
+    req.flash("messages", "Incorrect Password");
     return res.redirect("login");
   }
 
