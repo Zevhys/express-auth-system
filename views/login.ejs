@@ -5,50 +5,40 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Zevhys">
-  <meta name="description" content="Form Signup Page">
+  <meta name="description" content="Dashboard Page">
   <meta name="referrer" content="no-referrer">
 
   <title>Login</title>
+
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <h3 align="center">Login Page</h3>
+  <form action="/login" method="post" autocomplete="off">
+    <h3>Login</h3>
 
-  <div align="center">
-    <form action="/login" method="post">
-      <label for="username">Username</label>
-      <br>
-      <input type="text" id="username" name="username" placeholder="enter your username" required minlength="5"
-        maxlength="50" id="name" autocomplete="off" spellcheck="false" pattern=".*\S.*"
-        title="Please enter at least one non-space character">
-      <br>
-      <br>
+    <div class="form">
+      <input type="text" name="username" id="username" minlength="5" maxlength="25" spellcheck="false"
+        autocomplete="off" pattern=".*\S.*" title="Please enter at least one non-space character" required>
+      <label for="username">Username*</label>
+    </div>
 
-      <label for="password">Password</label>
-      <br>
-      <input type="password" id="password" name="password" placeholder="enter your password" required minlength="12"
-        maxlength="50" id="name" autocomplete="off" spellcheck="false" pattern=".*\S.*"
-        title="Please enter at least one non-space character">
-      <br>
+    <div class="form">
+      <input type="password" name="password" id="password" minlength="12" maxlength="50" spellcheck="false"
+        autocomplete="off" required>
+      <label for="password">Password*</label>
+      <span class="eye"><img width="20" height="20" src="eye-regular.svg" alt="eye-icon"></span>
+    </div>
 
-      <p id="messages">
-        <%= messages %>
-      </p>
+    <p id="messages">
+      <%= messages %>
+    </p>
 
-      <button type="submit">login</button>
+    <button type="submit">Login</button>
+    <p>Don't have an account? <a href="/signup">SignUp</a></p>
+  </form>
 
-      <p>Don't have an account? <a href="/signup">signup</a></p>
-    </form>
-  </div>
-
-  <script>
-    setTimeout(() => {
-      const messages = document.getElementById("messages")
-      if (messages) {
-        messages.textContent = ""
-      }
-    }, 3000);
-  </script>
+  <script src="script.js"></script>
 </body>
 
 </html>

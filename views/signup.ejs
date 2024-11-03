@@ -8,47 +8,38 @@
   <meta name="description" content="Form Signup Page">
   <meta name="referrer" content="no-referrer">
 
-  <title>Sign Up</title>
+  <title>SignUp</title>
+
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <h3 align="center">Sign Up Page</h3>
+  <form action="/signup" method="post" autocomplete="off">
+    <h3>SignUp</h3>
 
-  <div align="center">
-    <form action="/signup" method="post" autocomplete="off">
-      <label for="username">Username</label>
-      <br>
-      <input type="text" id="username" name="username" placeholder="enter your username" required minlength="5"
-        maxlength="50" autocomplete="off" spellcheck="false" pattern=".*\S.*"
-        title="Please enter at least one non-space character">
-      <br>
-      <br>
+    <div class="form">
+      <input type="text" name="username" id="username" minlength="5" maxlength="25" spellcheck="false"
+        autocomplete="off" pattern=".*\S.*" title="Please enter at least one non-space character" required>
+      <label for="username">Username*</label>
+    </div>
 
-      <label for="password">Password</label>
-      <br>
-      <input type="password" id="password" name="password" placeholder="enter your password" required minlength="12"
-        maxlength="50" autocomplete="off" spellcheck="false" pattern=".*\S.*"
-        title="Please enter at least one non-space character">
-      <br>
+    <div class="form">
+      <input type="password" name="password" id="password" minlength="12" maxlength="50" spellcheck="false"
+        autocomplete="off" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*_=+\-]).{12,}$"
+        title="Password must be 12 chars, with uppercase, lowercase, number & symbol" required>
+      <label for="password">Password*</label>
+      <span class="eye"><img width="20" height="20" src="eye-regular.svg" alt="eye-icon"></span>
+    </div>
 
-      <p id="messages">
-        <%= messages %>
-      </p>
+    <p id="messages">
+      <%= messages %>
+    </p>
 
-      <button type="submit">signup</button>
+    <button type="submit">SignUp</button>
+    <p>Already have an account? <a href="/login">Login</a></p>
+  </form>
 
-      <p>Already have an account? <a href="/login">login</a></p>
-    </form>
-  </div>
-
-  <script>
-    setTimeout(() => {
-      const messages = document.getElementById("messages")
-      if (messages) {
-        messages.textContent = ""
-      }
-    }, 3000);
-  </script>
+  <script src="script.js"></script>
 </body>
 
 </html>

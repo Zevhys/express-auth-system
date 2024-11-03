@@ -4,17 +4,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Zevhys">
+  <meta name="description" content="Form Login Page">
+  <meta name="referrer" content="no-referrer">
+
   <title>dashboard</title>
+
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <h3 align="center">
-    welcome back <%= user.username %>
-  </h3>
+  <div class="container">
+    <h3 class="text">
+      welcome back <%= user.username %>
+    </h3>
 
-  <div align="center">
     <form action="/logout" method="post">
-      <button type="submit">log out</button>
+      <br>
+      <br>
+      <button type="submit">Log Out</button>
     </form>
   </div>
 </body>

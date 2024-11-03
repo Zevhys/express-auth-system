@@ -1,0 +1,161 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  color-scheme: dark;
+  color: black;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form[action="/signup"],
+form[action="/login"] {
+  border-radius: 8px;
+  box-shadow: 6px 6px 10px 0 rgba(0, 0, 0, 0.1);
+  padding: 36px 24px;
+  background: #ffffff;
+  text-align: center;
+}
+
+form h3 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.text {
+  color: #ffffff;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: black !important;
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+  outline: none;
+  caret-color: black;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+form .form {
+  width: 100%;
+  position: relative;
+  margin: 48px 0;
+}
+
+form .form input {
+  width: 100%;
+  padding: 12px 8px 0;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid #eaeaea;
+  font-size: 18px;
+  line-height: 1.3;
+  position: relative;
+  background: transparent;
+  z-index: 10;
+  transition: border-bottom 0.3s;
+}
+
+form .form label {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  font-size: 18px;
+  transition: all 0.3s;
+  z-index: 9;
+}
+
+form .form input:focus,
+form .form input:valid {
+  border-bottom: 2px solid #28df99;
+}
+
+form .form input:focus ~ label,
+label.active {
+  transform: translateY(-24px);
+  font-size: 16px !important;
+  color: #28df99;
+}
+
+form .form span.eye {
+  position: absolute;
+  right: 0;
+  top: -5px;
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 11;
+}
+
+form button {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  padding: 8px 24px;
+  background: #28df99;
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: -16px;
+  margin-bottom: 24px;
+  transform: translateY(-1.3em);
+}
+
+.container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.container h3 {
+  margin-bottom: 20px;
+}
+
+#messages {
+  visibility: hidden;
+  margin: 16px 0;
+  opacity: 0;
+  height: 20px;
+  transform: translateY(-1.5em);
+}
+
+#messages.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+form p {
+  font-size: 16px;
+  text-align: center;
+  transform: translateY(-1.8em);
+}
+
+form p a {
+  text-decoration: none;
+  color: #10a37f;
+}
+
+form p a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.4rem;
+}
+
+@media (max-width: 576px) {
+  form {
+    width: 80%;
+  }
+}
+
+@media (max-width: 320px) {
+  .form {
+    width: 90%;
+  }
+}
