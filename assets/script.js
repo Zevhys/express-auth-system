@@ -35,6 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setTimeout(() => {
       messages.classList.remove("show");
-    }, 3000);
+    }, 4000);
   }
 });
