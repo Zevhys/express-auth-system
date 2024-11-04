@@ -28,15 +28,49 @@ router.post("/signup", async (req, res) => {
   const { username, password } = req.body;
   const user = new User({ username, password });
   const existingUser = await User.findOne({ username });
+  let passwordPattern =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*_=+\-]).{12,25}$/;
+  let usernamePattern =
+    /^(?!\s)(?!.*\s\s)[a-zA-Z0-9]{5,20}(?: [a-zA-Z0-9]+)*(?<!\s)$/;
 
   if (existingUser) {
-    req.flash("messages", "Username Already Exist, Use Another");
+    req.flash("messages", "Username already exist");
     return res.redirect("/signup");
   }
 
-  await user.save();
-  req.session.user_id = user._id;
-  res.redirect("/dashboard");
+  if (!username) {
+    req.flash("messages", "Username is required");
+    return res.redirect("/signup");
+  } else if (!password) {
+    req.flash("messages", "Password is required");
+    return res.redirect("/signup");
+  }
+
+  if (!passwordPattern.test(password)) {
+    req.flash(
+      "messages",
+      "Password must be 12-25 chars, with upper, lower, number & symbol"
+    );
+    return res.redirect("/signup");
+  }
+
+  if (!usernamePattern.test(username)) {
+    req.flash(
+      "messages",
+      " name must contain only letters and numbers, no double spaces or special characters"
+    );
+    return res.redirect("/signup");
+  }
+
+  try {
+    await user.save();
+    req.session.user_id = user._id;
+    res.redirect("/dashboard");
+  } catch (error) {
+    console.error("Error saving user:", error);
+    req.flash("messages", "Failed to create account. Please try again.");
+    res.redirect("/signup");
+  }
 });
 
 router.get("/login", authRedirect, (req, res) => {
@@ -46,6 +80,14 @@ router.get("/login", authRedirect, (req, res) => {
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
   const { user, error } = await User.authenticateUser(username, password);
+
+  if (!username) {
+    req.flash("messages", "Username is required");
+    return res.redirect("/login");
+  } else if (!password) {
+    req.flash("messages", "Password is required");
+    return res.redirect("/login");
+  }
 
   if (error === "User not found") {
     return res.redirect("/signup");
@@ -69,7 +111,7 @@ router.get("/dashboard", auth, async (req, res) => {
     const user = await User.findById(req.session.user_id);
     res.render("dashboard", { user });
   } catch (error) {
-    res.status(500).send("error fetching user data");
+    res.status(500).send("Error fetching user data");
   }
 });
 
