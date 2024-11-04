@@ -22,6 +22,7 @@ form[action="/login"] {
   padding: 36px 24px;
   background: #ffffff;
   text-align: center;
+  padding-bottom: 0;
 }
 
 form h3 {
@@ -74,8 +75,7 @@ form .form label {
   z-index: 9;
 }
 
-form .form input:focus,
-form .form input:valid {
+form .form input:focus {
   border-bottom: 2px solid #28df99;
 }
 
@@ -125,6 +125,8 @@ form button {
   opacity: 0;
   height: 20px;
   transform: translateY(-1.5em);
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  color: red;
 }
 
 #messages.show {
