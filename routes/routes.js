@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
+const newLine = "\n";
 
 const auth = (req, res, next) => {
   if (!req.session.user_id) {
@@ -28,38 +29,30 @@ router.post("/signup", async (req, res) => {
   const { username, password } = req.body;
   const user = new User({ username, password });
   const existingUser = await User.findOne({ username });
-  let passwordPattern =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*_=+\-]).{12,25}$/;
-  let usernamePattern =
+  const passwordPattern =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*_=+\-]).{12,20}$/;
+  const usernamePattern =
     /^(?!\s)(?!.*\s\s)[a-zA-Z0-9]{5,20}(?: [a-zA-Z0-9]+)*(?<!\s)$/;
 
-  if (existingUser) {
-    req.flash("messages", "Username already exist");
+  const flashAndRedirect = (message) => {
+    req.flash("messages", message);
     return res.redirect("/signup");
-  }
+  };
 
-  if (!username) {
-    req.flash("messages", "Username is required");
-    return res.redirect("/signup");
-  } else if (!password) {
-    req.flash("messages", "Password is required");
-    return res.redirect("/signup");
-  }
+  if (existingUser) return flashAndRedirect("Username already exists");
+  if (!username) return flashAndRedirect("Username is required");
+  if (!password) return flashAndRedirect("Password is required");
 
   if (!passwordPattern.test(password)) {
-    req.flash(
-      "messages",
-      "Password must be 12-25 chars, with upper, lower, number & symbol"
+    return flashAndRedirect(
+      "Password: 12-20 chars, upper, lower, number & symbol"
     );
-    return res.redirect("/signup");
   }
 
   if (!usernamePattern.test(username)) {
-    req.flash(
-      "messages",
-      " name must contain only letters and numbers, no double spaces or special characters"
+    return flashAndRedirect(
+      "Username: 5-20 letters and numbers, no double spaces or special characters"
     );
-    return res.redirect("/signup");
   }
 
   try {
