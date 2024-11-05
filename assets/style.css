@@ -122,9 +122,12 @@ form button {
 #messages {
   visibility: hidden;
   margin: 16px 0;
+  position: absolute;
   opacity: 0;
-  height: 20px;
-  transform: translateY(-1.5em);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: translateY(-5em);
   transition: opacity 0.3s ease, visibility 0.3s ease;
   color: red;
 }
@@ -153,6 +156,10 @@ form p a:hover {
 @media (max-width: 576px) {
   form {
     width: 80%;
+  }
+
+  #messages {
+    transform: translateY(-7em);
   }
 }
 
