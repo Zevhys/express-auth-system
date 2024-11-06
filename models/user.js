@@ -19,7 +19,7 @@ userSchema.statics.authenticateUser = async function (username, password) {
     return { user: null, error: "User not found" };
   }
 
-  const isMatch = bcrypt.compareSync(password, user.password);
+  const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
     return { user: null, error: "Incorrect password" };
   }
