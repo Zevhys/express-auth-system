@@ -45,13 +45,13 @@ router.post("/signup", async (req, res) => {
 
   if (!passwordPattern.test(password)) {
     return flashAndRedirect(
-      "Password: 12-20 chars, upper, lower, number & symbol"
+      "Password : <br> 12-20 chars, upper, lower, number & symbol"
     );
   }
 
   if (!usernamePattern.test(username)) {
     return flashAndRedirect(
-      "Username: 5-20 letters and numbers, no double spaces or special characters"
+      `Username : <br> 5-20 letters and numbers, no double spaces or special characters`
     );
   }
 
