@@ -8,7 +8,7 @@ const flash = require("connect-flash");
 
 mongoose
   .connect("mongodb://127.0.0.1/authDB")
-  .then((result) => {
+  .then(() => {
     console.log("connected to mongodb");
   })
   .catch((err) => {
@@ -45,7 +45,11 @@ app.use((req, res, next) => {
 app.set("view engine", "ejs");
 app.set("views", "views");
 app.use("", require("./routes/routes"));
+
+// eslint-disable-next-line
 app.use(favicon(path.join(__dirname, "favicon.ico")));
+
+// eslint-disable-next-line
 app.use(express.static(path.join(__dirname, "assets")));
 
 app.use((req, res) => {

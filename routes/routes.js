@@ -29,7 +29,7 @@ router.post("/signup", async (req, res) => {
   const user = new User({ username, password });
   const existingUser = await User.findOne({ username });
   const passwordPattern =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*_=+\-]).{12,20}$/;
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*_=+-]).{12,20}$/;
   const usernamePattern =
     /^(?!\s)(?!.*\s\s)[a-zA-Z0-9]{5,20}(?: [a-zA-Z0-9]+)*(?<!\s)$/;
 
@@ -103,6 +103,7 @@ router.get("/dashboard", auth, async (req, res) => {
     const user = await User.findById(req.session.user_id);
     res.render("dashboard", { user });
   } catch (error) {
+    console.error("Error fetching user data:", error);
     res.status(500).send("Error fetching user data");
   }
 });
