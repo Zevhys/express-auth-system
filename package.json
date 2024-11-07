@@ -16,5 +16,10 @@
     "express-session": "^1.18.1",
     "mongoose": "^8.7.3",
     "serve-favicon": "^2.5.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.14.0",
+    "eslint": "^9.14.0",
+    "globals": "^15.12.0"
   }
 }
