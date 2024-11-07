@@ -1,6 +1,6 @@
 # express-auth-system
 
-[![Author](http://img.shields.io/badge/author-@Zevhys-blue.svg)](https://www.linkedin.com/in/rakha-djauhari/) [![GitHub license](https://img.shields.io/github/license/Zevhys/express-auth-system.svg)](https://github.com/Zevhys/express-auth-system/blob/main/LICENSE) ![GitHub repo size](https://img.shields.io/github/repo-size/Zevhys/express-auth-system)
+[![Author](http://img.shields.io/badge/author-@Zevhys-blue.svg)](https://www.linkedin.com/in/rakha-djauhari/) [![GitHub license](https://img.shields.io/github/license/Zevhys/express-auth-system.svg)](https://github.com/Zevhys/express-auth-system/blob/main/LICENSE) ![GitHub repo size](https://img.shields.io/github/repo-size/Zevhys/express-auth-system) [![CodeQL](https://github.com/Zevhys/express-auth-system/actions/workflows/codeql.yml/badge.svg)](https://github.com/Zevhys/express-auth-system/actions/workflows/codeql.yml) [![CodeQL] (https://github.com/Zevhys/express-auth-system/actions/workflows/eslint.yml/badge.svg)](https://github.com/Zevhys/express-auth-system/actions/workflows/eslint.yml)
 
 This project is designed as a scalable and user-friendly backend application, providing a robust foundation for implementing authentication, route security, and enhanced user feedback through styled flash messages.
 
