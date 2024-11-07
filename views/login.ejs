@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Zevhys">
+  <meta name="description" content="Dashboard Page">
+  <meta name="referrer" content="no-referrer">
+
+  <title>Login</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <form action="/login" method="post" autocomplete="off">
+    <h3>Login</h3>
+
+    <div class="form">
+      <input type="text" name="username" id="username" spellcheck="false" autocomplete="off">
+      <label for="username">Username*</label>
+    </div>
+
+    <div class="form">
+      <input type="password" name="password" id="password" spellcheck="false" autocomplete="off">
+      <label for="password">Password*</label>
+      <span class="eye"><img width="20" height="20" src="eye-regular.svg" alt="eye-icon"></span>
+    </div>
+
+    <p id="messages">
+      <%= messages %>
+    </p>
+
+    <button type="submit">Login</button>
+    <p>Don't have an account? <a href="/signup">SignUp</a></p>
+  </form>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
