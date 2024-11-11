@@ -17,11 +17,11 @@ This project is designed as a scalable and user-friendly backend application, pr
 # Requirements
 
 ```bash
-# Install Dependencies
-npm install
-
 # Clone Repository
 git clone https://github.com/Zevhys/express-auth-system .
+
+# Install Dependencies
+npm install
 
 # Start MongoDB
 - mongod
