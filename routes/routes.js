@@ -1,6 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
+const rateLimit = require("express-rate-limit");
+
+const limiter = rateLimit({
+  windowsMs: 10 * 60 * 1000,
+  max: 10,
+});
 
 const auth = (req, res, next) => {
   if (!req.session.user_id) {
@@ -24,10 +30,10 @@ router.get("/signup", authRedirect, (req, res) => {
   res.render("signup");
 });
 
-router.post("/signup", async (req, res) => {
+router.post("/signup", limiter, async (req, res) => {
   const { username, password } = req.body;
   const user = new User({ username, password });
-  const existingUser = await User.findOne({ username });
+  const existingUser = await User.findOne({ $eq: username });
   const passwordPattern =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*_=+-]).{12,20}$/;
   const usernamePattern =
@@ -69,7 +75,7 @@ router.get("/login", authRedirect, (req, res) => {
   res.render("login");
 });
 
-router.post("/login", async (req, res) => {
+router.post("/login", limiter, async (req, res) => {
   const { username, password } = req.body;
   const { user, error } = await User.authenticateUser(username, password);
 
@@ -98,7 +104,7 @@ router.post("/logout", auth, (req, res) => {
   });
 });
 
-router.get("/dashboard", auth, async (req, res) => {
+router.get("/dashboard", auth, limiter, async (req, res) => {
   try {
     const user = await User.findById(req.session.user_id);
     res.render("dashboard", { user });

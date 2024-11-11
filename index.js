@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const favicon = require("serve-favicon");
 const path = require("path");
 const flash = require("connect-flash");
+const lusca = require("lusca");
 
 mongoose
   .connect("mongodb://127.0.0.1/authDB")
@@ -30,12 +31,13 @@ app.use(
       maxAge: 5 * 60 * 1000,
       httpOnly: true,
       sameSite: "Lax",
-      secure: false,
+      secure: true,
     },
   })
 );
 
 app.use(flash());
+app.use(lusca.csrf());
 
 app.use((req, res, next) => {
   res.locals.messages = req.flash("messages");
