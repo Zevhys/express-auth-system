@@ -33,7 +33,7 @@ router.get("/signup", authRedirect, (req, res) => {
 router.post("/signup", limiter, async (req, res) => {
   const { username, password } = req.body;
   const user = new User({ username, password });
-  const existingUser = await User.findOne({ $eq: username });
+  const existingUser = await User.findOne({ username: { $eq: username } });
   const passwordPattern =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*_=+-]).{12,20}$/;
   const usernamePattern =
