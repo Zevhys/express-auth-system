@@ -16,7 +16,7 @@
     "express-rate-limit": "^8.0.1",
     "express-session": "^1.18.1",
     "lusca": "^1.7.0",
-    "mongoose": "^8.7.3",
+    "mongoose": "^9.0.0",
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
